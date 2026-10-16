@@ -770,8 +770,131 @@ body.gallery-open { overflow: hidden; }
 .gallery.open .gallery-grid .card { opacity: 1; transform: none; }
 .gallery-grid .card:hover { border-color: rgba(120, 160, 255, 0.45); }
 
-/* Skills: giant outlined marquees */
-.skills { padding: 6rem 0 8rem; overflow: hidden; }
+/* Education */
+.edu {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4rem;
+  align-items: center;
+  padding-bottom: 3.5rem;
+  border-bottom: 1px solid var(--line);
+}
+.edu-score { display: flex; flex-direction: column; gap: 0.6rem; }
+.edu-cgpa {
+  font-family: "Unbounded", sans-serif;
+  font-weight: 600;
+  font-size: clamp(4.5rem, 11vw, 8.5rem);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  background: linear-gradient(180deg, #fff 10%, var(--blue-soft) 60%, var(--blue));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 30px rgba(61, 123, 255, 0.35));
+  font-variant-numeric: tabular-nums;
+}
+.edu-score-label { font-size: 0.75rem; letter-spacing: 0.35em; color: var(--muted); }
+.edu-badge {
+  align-self: flex-start;
+  margin-top: 0.6rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid rgba(61, 123, 255, 0.45);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  color: var(--blue-soft);
+}
+.edu-dates { font-size: 0.75rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); }
+.edu-main h3 {
+  font-family: "Syne", sans-serif;
+  font-weight: 700;
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin: 0.9rem 0 0.8rem;
+}
+.edu-degree { font-size: 1.1rem; color: var(--ice); opacity: 0.85; }
+.edu-degree em { font-size: 1.2em; }
+.edu-progress { margin-top: 2rem; max-width: 520px; }
+.edu-bar { height: 2px; background: var(--line); border-radius: 2px; overflow: visible; }
+.edu-bar span {
+  position: relative;
+  display: block;
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, transparent, var(--blue), var(--blue-soft));
+  box-shadow: 0 0 10px var(--blue);
+  transition: width 2s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.edu-bar span::after {
+  content: "";
+  position: absolute;
+  right: -4px; top: 50%;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #fff;
+  transform: translateY(-50%);
+  box-shadow: 0 0 6px 2px #fff, 0 0 20px 6px rgba(61, 123, 255, 0.7);
+}
+.edu-progress p { margin-top: 0.8rem; font-size: 0.8rem; color: var(--muted); letter-spacing: 0.04em; }
+.edu-progress p span { color: var(--blue-soft); font-family: "Unbounded", sans-serif; }
+.edu-sub {
+  margin: 3.5rem 0 0.5rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--blue);
+}
+/* School results under the university */
+.school {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--line);
+}
+.school-item {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  padding: 2.2rem 0;
+}
+.school-item + .school-item { padding-left: 2.5rem; border-left: 1px solid var(--line); }
+.school-score {
+  font-family: "Unbounded", sans-serif;
+  font-weight: 600;
+  font-size: clamp(2rem, 4vw, 3rem);
+  letter-spacing: -0.03em;
+  color: var(--blue-soft);
+  text-shadow: 0 0 24px rgba(61, 123, 255, 0.4);
+  font-variant-numeric: tabular-nums;
+  min-width: 5.2em;
+}
+.school-item h4 {
+  font-family: "Syne", sans-serif;
+  font-weight: 700;
+  font-size: 1.35rem;
+  letter-spacing: -0.01em;
+}
+.school-item p { color: var(--muted); font-size: 0.9rem; margin-top: 0.3rem; }
+.board {
+  margin-left: 0.5rem;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid rgba(61, 123, 255, 0.45);
+  font-family: "Manrope", sans-serif;
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--blue-soft);
+  vertical-align: middle;
+}
+.school-item p em { font-size: 1.1em; }
+.education .marquee { margin: 0 -2rem; }
+.education .track span { font-size: clamp(2.2rem, 5.5vw, 4.5rem); }
+.edu-certs ul { list-style: none; display: flex; flex-wrap: wrap; gap: 0.8rem 3rem; margin-top: 1rem; }
+.edu-certs li { font-size: 1.05rem; }
+.edu-certs em { font-size: 1.15em; }
+.tl-stack a { color: var(--ice); border-bottom: 1px solid rgba(143, 182, 255, 0.4); }
+.tl-stack a:hover { color: #fff; border-color: var(--blue-soft); }
 .marquee {
   overflow: hidden;
   padding: 1rem 0;
@@ -881,6 +1004,11 @@ footer {
   .nav a { font-size: 1.05rem; }
   .nav ul a:hover { transform: scale(1.15); }
   .timeline { padding-left: 46px; }
+  .edu { grid-template-columns: 1fr; gap: 2rem; }
+  .school { grid-template-columns: 1fr; }
+  .school-item + .school-item { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); }
+  .school-score { min-width: 4.4em; }
+  .education .marquee { margin: 0 -1.2rem; }
   .tl-rail { left: 10px; }
   .tl-node { left: -42px; }
   .section, .section-inner { padding-left: 1.2rem; padding-right: 1.2rem; }

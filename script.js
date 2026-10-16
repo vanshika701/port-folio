@@ -493,30 +493,44 @@ const PROJECTS = [
   {
     title: "PropVisit",
     glyph: "PV",
-    desc: "Property listings and site-visit booking: buyers book visits, agents manage listings and requests in a live dashboard.",
-    tags: ["Python", "React", "PostgreSQL", "Redis", "Docker"],
+    desc: "Full-stack property visit booking: find listings on a map, hold a slot, and never get double-booked.",
+    tags: ["FastAPI", "PostgreSQL", "Redis", "React", "TypeScript", "Docker"],
     img: "",
     link: "https://github.com/vanshika701/Real-estate-platform",
     colors: ["#5fe0a0", "#06281a"],
     details: {
       overview: [
-        "A real-estate platform where buyers browse listings and book site visits, and agents manage their listings and handle visit requests from a live dashboard.",
-        "Work in progress: the full write-up with architecture, design decisions and load-test results is coming.",
+        "A full-stack platform where buyers find property listings on a Leaflet map and reserve viewing slots, while agents manage listings and handle visit requests from a live dashboard.",
+        "The hard problem is concurrency: two buyers grabbing the same slot at the same moment. PropVisit solves it in two layers, and the test suite proves both layers actually work.",
+      ],
+      metrics: [
+        ["24", "REST and WebSocket endpoints"],
+        ["221", "tests across pytest, Vitest and Playwright, run in GitHub Actions CI"],
+        ["5 min", "Redis slot hold while a buyer completes a booking"],
+        ["6", "safeguards deliberately broken to prove the tests catch each one"],
       ],
       sections: [
         {
+          title: "No double-booking, proven",
+          items: [
+            "A 5-minute Redis hold reserves the slot while the buyer books.",
+            "A partial unique index in PostgreSQL guarantees it at the database level, even if the hold fails.",
+            "Concurrent-request tests fire simultaneous bookings, and six safeguards were deliberately broken to confirm the tests catch every one.",
+          ],
+        },
+        {
           title: "Engineering",
           items: [
-            "Python API served with uvicorn, versioned under /api/v1 with interactive docs.",
-            "PostgreSQL 16 and Redis 7, with the whole stack runnable through Docker Compose.",
-            "Tested end to end: pytest, Vitest + React Testing Library, Playwright, plus linting and type-checks in CI.",
-            "Deploy plan on free tiers: Vercel (frontend), Render (API + worker), Supabase (Postgres + storage), Upstash (Redis).",
+            "Redis search caching, live agent alerts over WebSockets, and a queued email worker.",
+            "Backend tests run against real PostgreSQL and Redis, not mocks.",
+            "The whole stack runs through Docker Compose; deploy plan on Vercel, Render, Supabase and Upstash.",
           ],
         },
       ],
-      stack: ["Python", "React", "TypeScript", "PostgreSQL", "Redis", "Docker", "pytest", "Vitest", "Playwright", "GitHub Actions"],
+      stack: ["Python", "FastAPI", "PostgreSQL", "Redis", "React", "TypeScript", "Leaflet", "WebSockets", "Docker", "pytest", "Vitest", "Playwright", "GitHub Actions"],
     },
   },
+
   {
     title: "RAKSHAK",
     glyph: "RK",
@@ -1034,3 +1048,56 @@ function updateTimeline() {
 window.addEventListener("scroll", updateTimeline, { passive: true });
 window.addEventListener("resize", updateTimeline);
 updateTimeline();
+
+// ============================================================
+//  Education: count the CGPA up and fill the degree progress bar
+// ============================================================
+
+const edu = document.getElementById("edu");
+const DEGREE_START = new Date(2023, 7, 1); // Aug 2023
+const DEGREE_END = new Date(2027, 4, 31); // May 2027
+const degreePct = Math.round(
+  Math.min(Math.max((Date.now() - DEGREE_START) / (DEGREE_END - DEGREE_START), 0), 1) * 100
+);
+
+new IntersectionObserver(
+  (entries, obs) => {
+    if (!entries[0].isIntersecting) return;
+    obs.disconnect();
+    const cgpa = edu.querySelector(".edu-cgpa");
+    const pctEl = document.getElementById("edu-pct");
+    const target = parseFloat(cgpa.dataset.target);
+    const start = performance.now();
+    const DURATION = reduceMotion ? 0 : 1800;
+    edu.querySelector(".edu-bar span").style.width = `${degreePct}%`;
+    (function tick(now) {
+      const t = DURATION ? Math.min((now - start) / DURATION, 1) : 1;
+      const e = 1 - Math.pow(1 - t, 3);
+      cgpa.textContent = (target * e).toFixed(2);
+      pctEl.textContent = Math.round(degreePct * e);
+      if (t < 1) requestAnimationFrame(tick);
+    })(start);
+  },
+  { threshold: 0.4 }
+).observe(edu);
+
+// School percentages count up when they scroll into view
+const school = document.getElementById("school");
+new IntersectionObserver(
+  (entries, obs) => {
+    if (!entries[0].isIntersecting) return;
+    obs.disconnect();
+    school.querySelectorAll("[data-count]").forEach((el) => {
+      const target = parseFloat(el.dataset.count);
+      const decimals = parseInt(el.dataset.decimals, 10);
+      const start = performance.now();
+      const DURATION = reduceMotion ? 0 : 1600;
+      (function tick(now) {
+        const t = DURATION ? Math.min((now - start) / DURATION, 1) : 1;
+        el.textContent = (target * (1 - Math.pow(1 - t, 3))).toFixed(decimals);
+        if (t < 1) requestAnimationFrame(tick);
+      })(start);
+    });
+  },
+  { threshold: 0.4 }
+).observe(school);
