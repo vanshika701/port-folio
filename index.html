@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vanshika Srivastava — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;600&family=Syne:wght@500;700;800&family=Unbounded:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="locked">
+  <!-- Fixed 3D particle scene behind everything -->
+  <canvas id="scene"></canvas>
+  <div class="grain"></div>
+
+  <a href="#hero" class="logo">VS<span>.</span></a>
+
+  <nav class="nav" aria-label="Main">
+    <ul>
+      <li><a href="#experience">Work Exp</a></li>
+      <li><a href="#projects">Proof of Work</a></li>
+      <li><a href="#" target="_blank" rel="noopener">Resume <sup>↗</sup></a></li>
+      <li><a href="#" target="_blank" rel="noopener">LeetCode <sup>↗</sup></a></li>
+      <li><a href="#" target="_blank" rel="noopener">GitHub <sup>↗</sup></a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <!-- HERO: the name itself is drawn by the particle scene -->
+    <section id="hero" class="hero">
+      <div class="hero-content">
+        <p class="eyebrow">Hello, I'm</p>
+        <h1 class="hero-name">Vanshika Srivastava</h1>
+        <div class="name-space"></div>
+        <p class="tagline">Developer · <em>AI enthusiast</em> · Builder of thoughtful things</p>
+      </div>
+      <div class="scroll-hint">
+        <span>Scroll</span>
+        <div class="line"></div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section">
+      <p class="label reveal"><span>01</span> About</p>
+      <p class="statement" data-words>
+        I'm a developer who turns ideas into real, usable products, from AI-powered tools
+        to playful little games, and I care deeply about the <em>why</em> behind every decision.
+      </p>
+      <div class="about-meta reveal">
+        <div><span class="meta-key">Currently</span><span>TA for an AI course</span></div>
+        <div><span class="meta-key">Exploring</span><span>ML, web &amp; healthcare tech</span></div>
+        <div><span class="meta-key">Based in</span><span>India</span></div>
+      </div>
+    </section>
+
+    <!-- WORK EXPERIENCE: a line draws itself as you scroll and lights up each role -->
+    <section id="experience" class="section">
+      <p class="label reveal"><span>02</span> Work experience</p>
+      <div class="timeline" id="timeline">
+        <div class="tl-rail"><div class="tl-fill"></div><div class="tl-comet"></div></div>
+
+        <article class="tl-item">
+          <span class="tl-node"></span>
+          <span class="tl-year" aria-hidden="true">2025</span>
+          <div class="tl-content">
+            <p class="tl-meta"><span class="tl-now">Now</span> 2025 — Present</p>
+            <h3>Teaching Assistant</h3>
+            <p class="tl-company"><em>AI Course</em></p>
+            <p class="tl-desc">Guiding students through AI concepts, model design decisions and debugging, step by step.</p>
+            <ul class="tl-points">
+              <li>Run sessions explaining the <em>why</em> behind each design choice</li>
+              <li>Help students debug models and pipelines</li>
+              <li>Prepare examples and walkthroughs for coursework</li>
+            </ul>
+            <p class="tl-stack">Python / Machine Learning / Teaching</p>
+          </div>
+        </article>
+
+        <article class="tl-item">
+          <span class="tl-node"></span>
+          <span class="tl-year" aria-hidden="true">20XX</span>
+          <div class="tl-content">
+            <p class="tl-meta">20XX — 20XX · City or Remote</p>
+            <h3>Your Role</h3>
+            <p class="tl-company"><em>Company Name</em></p>
+            <p class="tl-desc">One line about what you built, owned, or improved there.</p>
+            <ul class="tl-points">
+              <li>An achievement, ideally with a number</li>
+              <li>Something you shipped or led</li>
+            </ul>
+            <p class="tl-stack">Tech / You / Used</p>
+          </div>
+        </article>
+
+        <article class="tl-item">
+          <span class="tl-node"></span>
+          <span class="tl-year" aria-hidden="true">20XX</span>
+          <div class="tl-content">
+            <p class="tl-meta">20XX — 20XX · City or Remote</p>
+            <h3>Earlier Role</h3>
+            <p class="tl-company"><em>Company Name</em></p>
+            <p class="tl-desc">One line about what you did there.</p>
+            <ul class="tl-points">
+              <li>An achievement or responsibility</li>
+            </ul>
+            <p class="tl-stack">Tech / You / Used</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- PROJECTS: swipeable card stack (cards are rendered from the list in script.js) -->
+    <section id="projects" class="section">
+      <p class="label reveal"><span>03</span> Proof of work</p>
+      <div class="work reveal">
+        <div class="deck" id="deck" tabindex="0" aria-label="Project cards. Swipe, drag, or use the arrow keys."></div>
+        <div class="work-side">
+          <p class="work-count"><span id="deck-index">01</span> / <span id="deck-total">04</span></p>
+          <h3 class="work-heading">Things I've <em>built</em>,<br />one swipe at a time.</h3>
+          <p class="work-hint">Swipe or drag the card to see the next one.</p>
+          <div class="deck-controls">
+            <button id="deck-prev" aria-label="Previous project">←</button>
+            <button id="deck-next" aria-label="Next project">→</button>
+          </div>
+          <button class="gallery-btn" id="open-gallery">Open project gallery <span>↗</span></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="skills">
+      <p class="label section-inner reveal"><span>04</span> Skills &amp; tools</p>
+      <div class="marquee">
+        <div class="track">
+          <span>Python</span><i>✦</i><span>JavaScript</span><i>✦</i><span>React</span><i>✦</i><span>Django</span><i>✦</i><span>SQL</span><i>✦</i>
+          <span>Python</span><i>✦</i><span>JavaScript</span><i>✦</i><span>React</span><i>✦</i><span>Django</span><i>✦</i><span>SQL</span><i>✦</i>
+        </div>
+      </div>
+      <div class="marquee reverse">
+        <div class="track">
+          <span>Machine Learning</span><i>✦</i><span>Data Science</span><i>✦</i><span>Three.js</span><i>✦</i><span>Git</span><i>✦</i>
+          <span>Machine Learning</span><i>✦</i><span>Data Science</span><i>✦</i><span>Three.js</span><i>✦</i><span>Git</span><i>✦</i>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section contact">
+      <p class="label reveal"><span>05</span> Contact</p>
+      <h2 class="contact-title reveal">Have an idea?<br /><em>Let's talk.</em></h2>
+      <a class="email reveal" href="mailto:vs905snu@gmail.com">vs905snu@gmail.com <span>↗</span></a>
+      <ul class="socials reveal">
+        <li><a href="#">GitHub</a></li>
+        <li><a href="#">LinkedIn</a></li>
+        <li><a href="#">Resume</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- Full-screen project gallery -->
+  <div class="gallery" id="gallery" role="dialog" aria-modal="true" aria-label="Project gallery" aria-hidden="true">
+    <div class="gallery-head">
+      <h2>Project <em>gallery</em></h2>
+      <button class="gallery-close" id="close-gallery" aria-label="Close gallery">✕</button>
+    </div>
+    <div class="gallery-grid" id="gallery-grid"></div>
+  </div>
+
+  <!-- Project details panel (filled in from PROJECTS in script.js) -->
+  <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="drawer-title">
+    <div class="drawer-backdrop" data-close></div>
+    <div class="drawer-panel">
+      <button class="drawer-close" data-close aria-label="Close details">✕</button>
+      <div class="drawer-content" id="drawer-content"></div>
+    </div>
+  </aside>
+
+  <footer><span>© 2026 Vanshika Srivastava</span><span>Built with Three.js &amp; late nights</span></footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
