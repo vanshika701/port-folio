@@ -62,18 +62,6 @@ em {
 /* ---------- Nav: big stacked links, bottom-left ---------- */
 :root { --nav-w: 230px; }
 
-.logo {
-  position: fixed;
-  top: 1.6rem;
-  left: 2.5rem;
-  z-index: 10;
-  font-family: "Syne", sans-serif;
-  font-weight: 800;
-  font-size: 1.3rem;
-  letter-spacing: 0.02em;
-}
-.logo span { color: var(--blue); }
-
 .nav {
   position: fixed;
   left: 2.5rem;
@@ -992,7 +980,6 @@ footer {
 
 /* ---------- Responsive ---------- */
 @media (max-width: 800px) {
-  .logo { left: 1.2rem; top: 1.1rem; }
   /* On phones the stack becomes a swipeable row along the bottom */
   .nav {
     left: 0; right: 0; bottom: 0;
